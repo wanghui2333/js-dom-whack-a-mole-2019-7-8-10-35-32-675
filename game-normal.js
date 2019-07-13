@@ -1,10 +1,10 @@
 window.onload = function () {
 
-    const holes = document.querySelectorAll('.hole');
-    const scoreBoard = document.querySelector('.score');
-    const moles = document.querySelectorAll('.mole');
-    const startBtn = document.getElementById('start_btn');
-    let titleH1 = document.getElementById('title');
+    const holes = document.querySelectorAll('.hole'); //获取所有的地洞
+    const scoreBoard = document.querySelector('.score');//获取分数表
+    const moles = document.querySelectorAll('.mole');//获取老鼠
+    const startBtn = document.getElementById('start_btn');//开始按钮
+    let titleH1 = document.getElementById('title');//标题
 
     let lastHole;
     let timeUp = false;
@@ -31,6 +31,7 @@ window.onload = function () {
 
     function startGame() {
         // TODO: 写开始新游戏后发生的事
+        moles.style.display=block;
     }
 
 };

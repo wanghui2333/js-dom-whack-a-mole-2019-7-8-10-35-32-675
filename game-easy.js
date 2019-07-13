@@ -35,6 +35,11 @@ window.onload = function () {
 
         setTimeout(() => {
             // TODO: 写当游戏时间结束后要发生的事
+             timeUp=true;
+            titleH1.innerHTML="TIME UP！";
+            startBtn.style.display='inline';
+            startBtn.innerHTML="Replay！";
+            scoreBoard.innerHTML=score;
         }, gameTime)
     }
 
@@ -43,6 +48,11 @@ window.onload = function () {
      */
     function resetScoreAndTime() {
         // TODO: 写游戏的初始化设置
+         titleH1.innerHTML="WHACK-A-MOLE";
+          scoreBoard.innerHTML=0;
+         timeUp = false;
+          score = 0;
+          gameTime = 10000;
     }
 
     /**
@@ -63,7 +73,8 @@ window.onload = function () {
      */
     function randomTime(min, max) {
         // TODO: 写生成随机数的逻辑，
-        return 0;
+       if(max<min) return 0;
+        else return Math.round(Math.random()*(max-min)+min);
     }
 
     /**
@@ -74,7 +85,22 @@ window.onload = function () {
      */
     function randomHole(holes) {
         // TODO: 写地鼠随机选择钻出地洞的逻辑，如果与上一个是相同地洞，则重新选择一个地洞.
-        return null;
+        var hole;
+    		var numtest=Math.floor(Math.random()*6);
+    		hole=holes[numtest];
+    	if(lastHole!=null){
+
+    		 if(hole==lastHole){
+    		 	var numtest=Math.floor(Math.random()*6);
+    		hole=holes[numtest];
+    		 }
+    	}else{
+    		lastHole=hole;
+    	}
+       return hole;
+        // TODO: 写地鼠随机选择钻出地洞的逻辑，如果与上一个是相同地洞，则重新选择一个地洞.
+        //console.log(holes);
+       //return null;
     }
 
     /**
@@ -85,6 +111,13 @@ window.onload = function () {
      */
     function comeOutAndStop(hole, time) {
         // TODO: 写地鼠出洞并停留相应时间，如果游戏时间未结束(timeUp)，继续出洞(peep).
+         hole.classList.add('up');
+         setTimeout(() => {
+         	hole.classList.remove('up');
+        if(!timeUp){
+        	peep();
+        }
+      },time);
     }
 
     /**
@@ -92,6 +125,12 @@ window.onload = function () {
      */
     moles.forEach(mole => mole.addEventListener('click', function (e) {
         // TODO: 在这里写用户点击地鼠发生的事.
+        	console.log(e);
+    	if(!timeUp){
+    		score=score+1;
+    	scoreBoard.innerHTML=score;
+        // TODO: 在这里写用户点击地鼠发生的事.
+    	}
     }));
 
 };
